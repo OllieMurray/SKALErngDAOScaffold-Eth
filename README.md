@@ -94,11 +94,16 @@ yarn start
 yarn deploy
   
 In order to deploy on testnet or main net it will be necessary to run 
+    
 to generate a mnemonic.txt file
+    
     Yarn Generate 
-to view the account details   
-   run Yarn Account 
- be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
+
+    to view the account details   
+   
+    run Yarn Account 
+ 
+    be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
   
 
 🔏 Edit your smart contract `PowDAO.sol` in `packages/hardhat/contracts`
