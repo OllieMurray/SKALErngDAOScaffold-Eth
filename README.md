@@ -21,6 +21,8 @@ It may seem like oh you are trying to cover as much breadth as you can, but ther
 
 An additional longer term initiative could be to integrate skales secure randomness into harmony where there has been an concerted effort to support the development of DAOS and there exists a high level of DAO expertise. 
 
+IGNORE the re-entrancy contract - this was for additional tests of RNG and contract expoitability that I did not have time to get around to.
+
 # 🏛 Modifying important files in Scaffold-Eth To Connect and Deploy on SKALE
 
 1. copy an entry in hardhat.config under module.exports = {
@@ -84,54 +86,19 @@ Public Goods...
 This type of DAO can be used by sports teams to pay for field time, equipment, travel, etc. Another use case is for public contruction or maintenance projects. 
 A neighborhood/ town/ governoment can deposit a bunch of funds which can be democratically voted on and invoices can be submitted by the contractors.  
 
-## ⭐ Bonus
-
-A re-entrancy proxy contract has been created to verify the security of the PowDAO contract withdraw function. This contract can be found in `packages/hardhat/contracts`. To mimic a re-entrancy attack, uncomment the file in the deploy script `packages\hardhat\deploy\00_deploy_your_contract.js` and uncomment the 2 function calls in the contract itself ('powdao.getPayoutUnsafe(address(this));'). On deploy, this 'attacking' smart contract will create a proposal and if the proposal is approved by DAO members the proposer can withdraw the funds. To create a re-entrancy attack when you are withdrawing your funds, use the 'getPayoutUnsafe' function versus 'getPayout' which does not have the re-entrancy vulnerability. 
-
-Re-entrancy is caused by repeatedly calling the a fallback function in the proxy contracts receive function. This will create a loop which will be executed until it runs out of gas making repeated function calls. Try for yourself!
-
-[Info on Re-Entrancy Attack](https://quantstamp.com/blog/what-is-a-re-entrancy-attack)
-
-## 🏄‍♂️ Quick Start
-
-Prerequisites: [Node](https://nodejs.org/en/download/) plus [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
-
-> clone/fork 🏗 scaffold-eth:
-
-```bash
-git clone https://github.com/austintgriffith/scaffold-eth.git simple-proposal-DAO-re-entrancy-ex
-
-cd simple-proposal-DAO-re-entrancy-ex
-
-git checkout simple-DAO-proposals
-```
-
-> install and start your 👷‍ Hardhat chain:
-
-```bash
-cd simple-proposal-DAO-re-entrancy-ex
+## To Run/Stand up the project
+change to project to directory in cmd
 yarn install
 yarn chain
-```
-
-> in a second terminal window, start your 📱 frontend:
-
-```bash
-cd simple-proposal-DAO-re-entrancy-ex
 yarn start
-```
-
-> in a third terminal window, 🛰 deploy your contract:
-
-```bash
-cd simple-proposal-DAO-re-entrancy-ex
 yarn deploy
-```
   
 In order to deploy on testnet or main net it will be necessary to run 
-  Yarn Generate - to generate a mnemonic.txt file
-   run Yarn Account to view the account details
-  be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
+to generate a mnemonic.txt file
+    Yarn Generate 
+to view the account details   
+   run Yarn Account 
+ be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
   
 
 🔏 Edit your smart contract `PowDAO.sol` in `packages/hardhat/contracts`
