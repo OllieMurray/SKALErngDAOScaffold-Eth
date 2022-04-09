@@ -88,18 +88,21 @@ A neighborhood/ town/ governoment can deposit a bunch of funds which can be demo
 
 ## To Run/Stand up the project
 change to project to directory in cmd
-yarn install
-yarn chain
-yarn start
-yarn deploy
+    yarn install
+    
+    yarn chain
+    
+    yarn start
+    
+    yarn deploy
   
 In order to deploy on testnet or main net it will be necessary to run 
     
-to generate a mnemonic.txt file
+    to generate a mnemonic.txt file
     
     Yarn Generate 
 
-    to view the account details   
+    To view the account details   
    
     run Yarn Account 
  
