@@ -21,11 +21,54 @@ It may seem like oh you are trying to cover as much breadth as you can, but ther
 
 An additional longer term initiative could be to integrate skales secure randomness into harmony where there has been an concerted effort to support the development of DAOS and there exists a high level of DAO expertise. 
 
-# 🏛 Modifying important files in Scaffold-Eth To Connect with SKALE
+# 🏛 Modifying important files in Scaffold-Eth To Connect and Deploy on SKALE
 
-1. copy an entry in 
+1. copy an entry in hardhat.config under module.exports = {
+    defaultNetwork,
+    
+    and insert your network config.  For example in the hackathon the entry was the following:
+    skaleTestNodePortland: {
+      url: "https://portland.skalenodes.com/v1/handsome-enif",
+      chainId: 0x4a75965a9efef,
+      //[process.env.PRIVATE_KEY],  when we redeploy, we might want to change this...
+      //accounts: [process.env.PRIVATE_KEY],
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+    },
+    
+    in the same file set const defaultNetwork = "skaleTestNodePortland";
+    
+
+2. modify constants.js file to include the SKALE network.
+  skaleTestNodePortland: {
+    name: "skaleTestNodePortland",
+    color: "#53CBC9",
+    chainId: 0x4a75965a9efef,
+    blockExplorer: "https://explorer.skale.network/",
+    rpcUrl: "https://portland.skalenodes.com/v1/handsome-enif",
+  },
 
 
+3. Modify the deploy script to set the contract owner to your account (or your desired owner account)
+
+  00_deploy_your_contract.js
+  
+  in the above file, below 
+    PowDAO = await deploy("PowDAO", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [members],
+    log: true,
+  });
+  
+  add the following lines:
+  
+  const PowDAO2 = await ethers.getContract("PowDAO", deployer);
+  await PowDAO2.transferOwnership("<YOURDESIRED DEPLOYER ACCOUNT ADDRESS>");
+
+4. in App.jsx change, update the targetNetwork to the following
+  const targetNetwork = NETWORKS.skaleTestNodePortland;  (or whatever name you have given it...)
 
 # 🏛️ Simple DAO Description
 
@@ -84,6 +127,12 @@ yarn start
 cd simple-proposal-DAO-re-entrancy-ex
 yarn deploy
 ```
+  
+In order to deploy on testnet or main net it will be necessary to run 
+  Yarn Generate - to generate a mnemonic.txt file
+   run Yarn Account to view the account details
+  be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
+  
 
 🔏 Edit your smart contract `PowDAO.sol` in `packages/hardhat/contracts`
 
