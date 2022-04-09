@@ -88,6 +88,7 @@ A neighborhood/ town/ governoment can deposit a bunch of funds which can be demo
 
 ## To Run/Stand up the project
 change to project to directory in cmd
+    
     yarn install
     
     yarn chain
@@ -98,15 +99,15 @@ change to project to directory in cmd
   
 In order to deploy on testnet or main net it will be necessary to run 
     
-    to generate a mnemonic.txt file
+to generate a mnemonic.txt file
     
     Yarn Generate 
 
-    To view the account details   
+To view the account details   
    
     run Yarn Account 
  
-    be sure to use the SKALE faucet to fund your testnet account so you can deploy, run the contract functions, and manage the DAO.
+be sure to use the SKALE faucet to fund your testnet/mainnet account so you can deploy, run the contract functions, and manage the DAO.
   
 
 🔏 Edit your smart contract `PowDAO.sol` in `packages/hardhat/contracts`
